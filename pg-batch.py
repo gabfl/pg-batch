@@ -2,7 +2,7 @@
 
 # Author: Gabriel Bordeaux (gabfl)
 # Github: https://github.com/gabfl/pg-batch
-# Version: 1.0.1
+# Version: 1.0.2
 # Compatible with python 2.7 & 3
 
 import sys, time
@@ -12,7 +12,7 @@ import psycopg2, psycopg2.extras, argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-H", "--host", default="127.0.0.1",
                     help="PostgreSQL server host")
-parser.add_argument("-P", "--port", type=int, default=3306,
+parser.add_argument("-P", "--port", type=int, default=5432,
                     help="PostgreSQL server port")
 parser.add_argument("-U", "--user", required = True,
                     help="PostgreSQL user")
