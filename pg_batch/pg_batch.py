@@ -148,77 +148,82 @@ def query_yes_no(question, default="yes"):
         else:
             sys.stdout.write("Please respond with 'yes' or 'no' "
                              "(or 'y' or 'n').\n")
+def main():
+    global confirmedWrite, connection
 
-# Connect to the database
-try:
-    connection = psycopg2.connect(host = args.host,
-                                  user = args.user,
-                                  port = args.port,
-                                  password = args.password,
-                                  dbname = args.database);
-except:
-    print ("Error: PostgreSQL connection failed.");
-    sys.exit();
+    # Connect to the database
+    try:
+        connection = psycopg2.connect(host = args.host,
+                                      user = args.user,
+                                      port = args.port,
+                                      password = args.password,
+                                      dbname = args.database);
+    except:
+        print ("Error: PostgreSQL connection failed.");
+        sys.exit();
 
-try:
-    # confirmedWrite default value
-    confirmedWrite = False
-    if args.no_confirm:
-        confirmedWrite = True
+    try:
+        # confirmedWrite default value
+        confirmedWrite = False
+        if args.no_confirm:
+            confirmedWrite = True
 
-    with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-        # Default vars
-        minId = 0
+        with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+            # Default vars
+            minId = 0
 
-        while 1: # Infinite loop, will be broken by sys.exit()
-            # Get rows to modify
-            print("* Selecting data...")
-            sql = "SELECT {0} as id FROM ".format(args.primary_key) + args.table + " WHERE " + args.where + " AND {0} > %s ORDER BY {1} LIMIT %s".format(args.primary_key, args.primary_key)
-            print ("   query: " + sql % (minId, args.read_batch_size))
-            cursor.execute(sql, (minId, args.read_batch_size))
+            while 1: # Infinite loop, will be broken by sys.exit()
+                # Get rows to modify
+                print("* Selecting data...")
+                sql = "SELECT {0} as id FROM ".format(args.primary_key) + args.table + " WHERE " + args.where + " AND {0} > %s ORDER BY {1} LIMIT %s".format(args.primary_key, args.primary_key)
+                print ("   query: " + sql % (minId, args.read_batch_size))
+                cursor.execute(sql, (minId, args.read_batch_size))
 
-            # Row count
-            count = cursor.rowcount
+                # Row count
+                count = cursor.rowcount
 
-            # No more rows
-            if count == 0:
-                print ("* No more rows to modify!");
-                sys.exit();
+                # No more rows
+                if count == 0:
+                    print ("* No more rows to modify!");
+                    sys.exit();
 
-            # Loop thru rows
-            print("* Preparing to modify %s rows..." % count)
-            ids = []
-            for result in cursor:
-                # Append ID to batch
-                ids.append(result.get('id'));
-                # print(result)
+                # Loop thru rows
+                print("* Preparing to modify %s rows..." % count)
+                ids = []
+                for result in cursor:
+                    # Append ID to batch
+                    ids.append(result.get('id'));
+                    # print(result)
 
-                # Minimum ID for future select
-                minId = result.get('id');
+                    # Minimum ID for future select
+                    minId = result.get('id');
 
-                # Process write when batch size if reached
-                if len(ids) >= args.write_batch_size:
+                    # Process write when batch size if reached
+                    if len(ids) >= args.write_batch_size:
+                        if args.action == 'delete':
+                            # Process delete
+                            deleteBatch(ids)
+                        else :
+                            # Process update
+                            updateBatch(ids)
+
+                        # Reset ids
+                        ids = []
+
+                # Process final batch
+                if ids and len(ids) >= 0:
                     if args.action == 'delete':
                         # Process delete
                         deleteBatch(ids)
                     else :
                         # Process update
                         updateBatch(ids)
+    except SystemExit:
+        print("* Program exited")
+    #except:
+    #    print("Unexpected error:", sys.exc_info()[0])
+    finally:
+        connection.close()
 
-                    # Reset ids
-                    ids = []
-
-            # Process final batch
-            if ids and len(ids) >= 0:
-                if args.action == 'delete':
-                    # Process delete
-                    deleteBatch(ids)
-                else :
-                    # Process update
-                    updateBatch(ids)
-except SystemExit:
-    print("* Program exited")
-#except:
-#    print("Unexpected error:", sys.exc_info()[0])
-finally:
-    connection.close()
+if __name__ == '__main__':
+    main()

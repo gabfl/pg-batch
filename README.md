@@ -6,11 +6,11 @@ Updating or deleting a large amount of rows in PostgreSQL will create locks that
 
 This tool will run UPDATE and DELETE queries in small batches to limit locking. If a large number of rows has to be updated or deleted, it is also possible to limit the number of rows selected at once.
 
-## Requirements
+## Installation
 
- - Python 2.7 or 3
- - psycopg2 (`pip3 install psycopg2`)
- - argparse (`pip3 install argparse`)
+```
+pip3 install pg_batch
+```
 
 ## UPDATE example
 
@@ -25,14 +25,14 @@ UPDATE batch_test SET date = NOW() WHERE number > 30 AND date is NULL;
 This is the equivalent to process this update with batches of 20 rows:
 
 ```bash
-./pg-batch.py --host localhost \
-               --user postgres \
-               --password secret_password \
-               --database "test" \
-               --table "batch_test" \
-               --write_batch_size 20 \
-               --where "number > 30 AND date IS NULL" \
-               --set "date = NOW()"
+pg_batch --host localhost \
+         --user postgres \
+         --password secret_password \
+         --database "test" \
+         --table "batch_test" \
+         --write_batch_size 20 \
+         --where "number > 30 AND date IS NULL" \
+         --set "date = NOW()"
 ```
 
 Output sample:
@@ -67,14 +67,14 @@ DELETE FROM batch_test WHERE number > 30 AND date is NULL;
 This is the equivalent to process this delete with batches of 20 rows:
 
 ```bash
-./pg-batch.py --host localhost \
-               --user postgres \
-               --password secret_password \
-               --database "test" \
-               --table "batch_test" \
-               --write_batch_size 20 \
-               --where "number > 30 AND date IS NULL" \
-               --action "delete"
+pg_batch --host localhost \
+         --user postgres \
+         --password secret_password \
+         --database "test" \
+         --table "batch_test" \
+         --write_batch_size 20 \
+         --where "number > 30 AND date IS NULL" \
+         --action "delete"
 ```
 
 Output sample:
@@ -101,10 +101,10 @@ Output sample:
 ## Usage
 
 ```bash
-usage: pg-batch.py [-h] [-H HOST] [-P PORT] -U USER [-p PASSWORD] -d DATABASE
-                   -t TABLE [-id PRIMARY_KEY] -w WHERE [-s SET]
-                   [-rbz READ_BATCH_SIZE] [-wbz WRITE_BATCH_SIZE] [-S SLEEP]
-                   [-a {update,delete}] [-n]
+usage: pg_batch [-h] [-H HOST] [-P PORT] -U USER [-p PASSWORD] -d DATABASE -t
+                TABLE [-id PRIMARY_KEY] -w WHERE [-s SET]
+                [-rbz READ_BATCH_SIZE] [-wbz WRITE_BATCH_SIZE] [-S SLEEP]
+                [-a {update,delete}] [-n]
 
 optional arguments:
   -h, --help            show this help message and exit
