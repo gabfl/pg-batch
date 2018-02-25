@@ -8,7 +8,7 @@ except(IOError, ImportError):
 
 setup(
     name='pg_batch',
-    version='1.0.6',
+    version='1.0.7',
     description='Run large PostgreSQL UPDATE and DELETE queries with small batches to prevent locks',
     long_description=long_description,
     author='Gabriel Bordeaux',
@@ -17,7 +17,7 @@ setup(
     license='MIT',
     packages=['pg_batch'],
     package_dir={'pg_batch': 'src'},
-    install_requires=['psycopg2', 'argparse'],  # external dependencies
+    install_requires=['psycopg2-binary', 'argparse'],  # external dependencies
     entry_points={
         'console_scripts': [
             'pg_batch = pg_batch.pg_batch:main',
