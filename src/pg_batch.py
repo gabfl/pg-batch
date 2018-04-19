@@ -44,7 +44,7 @@ args = parser.parse_args()
 
 # Make sure we have a SET clause for updates
 if args.action == 'update' and args.set is None:
-    print ("Error: argument -s/--set is required for updates.");
+    print("Error: argument -s/--set is required for updates.")
     sys.exit()
 
 
@@ -59,8 +59,10 @@ def updateBatch(ids):
 
     # Prepare update
     print('* Updating %i rows...' % len(ids))
-    sql = "UPDATE " + args.table + " SET " + args.set + " WHERE {0} IN (".format(args.primary_key) + ', '.join([str(x) for x in ids]) + ")"
-    print ("   query: " + sql)
+    sql = "UPDATE " + args.table + " SET " + args.set + \
+        " WHERE {0} IN (".format(args.primary_key) + \
+        ', '.join([str(x) for x in ids]) + ")"
+    print("   query: " + sql)
 
     if confirmedWrite or query_yes_no("* Start updating?"):
         # Switch confirmedWrite skip the question for the next update
@@ -69,7 +71,7 @@ def updateBatch(ids):
         # Execute query
         runQuery(sql)
     else:  # answered "no"
-        print ("Error: Update declined.");
+        print("Error: Update declined.")
         sys.exit()
 
 
@@ -84,8 +86,10 @@ def deleteBatch(ids):
 
     # Prepare delete
     print('* Deleting %i rows...' % len(ids))
-    sql = "DELETE FROM " + args.table + " WHERE {0} IN (".format(args.primary_key) + ', '.join([str(x) for x in ids]) + ")"
-    print ("   query: " + sql)
+    sql = "DELETE FROM " + args.table + \
+        " WHERE {0} IN (".format(args.primary_key) + \
+        ', '.join([str(x) for x in ids]) + ")"
+    print("   query: " + sql)
 
     if confirmedWrite or query_yes_no("* Start deleting?"):
         # Switch confirmedWrite skip the question for the next delete
@@ -94,7 +98,7 @@ def deleteBatch(ids):
         # Execute query
         runQuery(sql)
     else:  # answered "no"
-        print ("Error: Delete declined.");
+        print("Error: Delete declined.")
         sys.exit()
 
 
@@ -166,8 +170,8 @@ def main():
                                       port=args.port,
                                       password=args.password,
                                       dbname=args.database)
-    except:
-        print ("Error: PostgreSQL connection failed.");
+    except Exception:
+        print("Error: PostgreSQL connection failed.")
         sys.exit()
 
     try:
@@ -183,8 +187,10 @@ def main():
             while 1:  # Infinite loop, will be broken by sys.exit()
                 # Get rows to modify
                 print("* Selecting data...")
-                sql = "SELECT {0} as id FROM ".format(args.primary_key) + args.table + " WHERE " + args.where + " AND {0} > %s ORDER BY {1} LIMIT %s".format(args.primary_key, args.primary_key)
-                print ("   query: " + sql % (minId, args.read_batch_size))
+                sql = "SELECT {0} as id FROM ".format(args.primary_key) + args.table + " WHERE " + args.where + \
+                    " AND {0} > %s ORDER BY {1} LIMIT %s".format(
+                        args.primary_key, args.primary_key)
+                print("   query: " + sql % (minId, args.read_batch_size))
                 cursor.execute(sql, (minId, args.read_batch_size))
 
                 # Row count
@@ -192,7 +198,7 @@ def main():
 
                 # No more rows
                 if count == 0:
-                    print ("* No more rows to modify!")
+                    print("* No more rows to modify!")
                     sys.exit()
 
                 # Loop thru rows
