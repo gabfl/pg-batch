@@ -1,6 +1,8 @@
 # pg-batch
 
-PostgreSQL equivalent of https://github.com/gabfl/mysql-batch-update.
+[![Build Status](https://travis-ci.org/gabfl/pg-batch.svg?branch=master)](https://travis-ci.org/gabfl/pg-batch)
+
+PostgreSQL equivalent of https://github.com/gabfl/mysql-batch.
 
 Updating or deleting a large amount of rows in PostgreSQL will create locks that will paralyze other queries running in parallel.
 

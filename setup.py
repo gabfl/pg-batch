@@ -8,7 +8,7 @@ except(IOError, ImportError):
 
 setup(
     name='pg_batch',
-    version='1.0.7',
+    version='1.1',
     description='Run large PostgreSQL UPDATE and DELETE queries with small batches to prevent locks',
     long_description=long_description,
     author='Gabriel Bordeaux',
