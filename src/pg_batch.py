@@ -142,7 +142,7 @@ def query_yes_no(question, default="yes"):
 
 def connect(host, user, port, password, database):
     """
-        Connect to a MySQL database
+        Connect to a PostgreSQL database
     """
 
     # Connect to the database
