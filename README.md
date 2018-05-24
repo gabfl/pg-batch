@@ -1,6 +1,7 @@
 # pg-batch
 
 [![Build Status](https://travis-ci.org/gabfl/pg-batch.svg?branch=master)](https://travis-ci.org/gabfl/pg-batch)
+[![codecov](https://codecov.io/gh/gabfl/pg-batch/branch/master/graph/badge.svg)](https://codecov.io/gh/gabfl/pg-batch)
 
 PostgreSQL equivalent of https://github.com/gabfl/mysql-batch.
 

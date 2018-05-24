@@ -2,11 +2,15 @@
 __pycache__/
 *.py[cod]
 .Python
-pg_batch.egg-info/
+*.egg-info
 build/
 dist/
 venv/
 .pytest_cache
+
+# Codecov
+.coverage
+coverage.xml
 
 # Mac
 .DS_Store
