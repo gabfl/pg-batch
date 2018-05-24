@@ -5,6 +5,8 @@ __pycache__/
 pg_batch.egg-info/
 build/
 dist/
+venv/
+.pytest_cache
 
 # Mac
 .DS_Store
