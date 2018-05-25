@@ -10,4 +10,4 @@ omit =
 exclude_lines =
   if __name__ == "__main__":
   main()
-  raw_input().lower()
+  return raw_input().lower()
