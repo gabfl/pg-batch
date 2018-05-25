@@ -119,7 +119,7 @@ class Test(unittest.TestCase):
                                          where='date IS NULL',
                                          set_='date=NOW()',
                                          no_confirm=True,
-                                         read_batch_size=30,
+                                         read_batch_size=35,
                                          write_batch_size=15))
 
         with unittest.mock.patch('builtins.input', return_value='yes'):
@@ -128,7 +128,7 @@ class Test(unittest.TestCase):
                                              table='batch_test',
                                              where='id < 100',
                                              set_='date=NOW()',
-                                             read_batch_size=30,
+                                             read_batch_size=35,
                                              write_batch_size=15))
 
         self.assertTrue(pg_batch.execute(self.host, self.user, self.port, self.password, self.database,
@@ -136,7 +136,7 @@ class Test(unittest.TestCase):
                                          table='batch_test',
                                          where='id > 20',
                                          no_confirm=True,
-                                         read_batch_size=30,
+                                         read_batch_size=35,
                                          write_batch_size=15))
 
     def test_execute_2(self):
