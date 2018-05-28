@@ -4,4 +4,4 @@ CREATE TABLE batch_test (id serial unique, number int default null, date timesta
 -- Add some rows
 INSERT INTO batch_test (number, date)
 SELECT generate_series, null
-FROM generate_series(1, 10000);
+FROM generate_series(1, 200);
