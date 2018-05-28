@@ -14,6 +14,23 @@ class Test(unittest.TestCase):
     password = ''
     port = 5432
 
+    # Sample schema
+    schema_path = 'sample_table/schema.sql'
+
+    def setUp(self):
+        # Connect to the database
+        connection = pg_batch.connect(
+            self.host, self.user, self.port, self.password, self.database)
+
+        # Read sample schema
+        with open(self.schema_path, 'r') as f:
+            schema = f.read()
+
+        # Apply schema for test
+        with connection.cursor() as cursor:
+            cursor.execute(schema)
+            connection.commit()
+
     def test_update_batch(self):
         pg_batch.connection = pg_batch.connect(
             self.host, self.user, self.port, self.password, self.database)
@@ -116,7 +133,7 @@ class Test(unittest.TestCase):
         self.assertTrue(pg_batch.execute(self.host, self.user, self.port, self.password, self.database,
                                          action='update',
                                          table='batch_test',
-                                         where='id < 50',
+                                         where='date IS NULL',
                                          set_='date=NOW()',
                                          no_confirm=True,
                                          read_batch_size=35,
@@ -127,7 +144,7 @@ class Test(unittest.TestCase):
             self.assertTrue(pg_batch.execute(self.host, self.user, self.port, self.password, self.database,
                                              action='update',
                                              table='batch_test',
-                                             where='id > 50 AND id <= 100',
+                                             where='date IS NULL',
                                              set_='date=NOW()',
                                              read_batch_size=35,
                                              write_batch_size=15))
@@ -136,10 +153,10 @@ class Test(unittest.TestCase):
         self.assertTrue(pg_batch.execute(self.host, self.user, self.port, self.password, self.database,
                                          action='delete',
                                          table='batch_test',
-                                         where='id > 100 AND id <= 150',
+                                         where='date IS NULL',
                                          no_confirm=True,
                                          read_batch_size=35,
-                                         write_batch_size=15))
+                                         write_batch_size=18))
 
     def test_execute_4(self):
         # Test exception for update without a set
@@ -147,5 +164,5 @@ class Test(unittest.TestCase):
                           self.host, self.user, self.port, self.password, self.database,
                           action='update',
                           table='batch_test',
-                          where='id > 150 AND id <= 200',
+                          where='date IS NULL',
                           no_confirm=True)

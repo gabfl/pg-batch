@@ -9,7 +9,7 @@ before_install:
   - python setup.py install
 before_script:
   - psql -c 'create database my_db;' -U postgres
-  - psql -f sample_table/schema.sql my_db -U postgres
+  #- psql -f sample_table/schema.sql my_db -U postgres
 script:
   - pycodestyle --exclude=venv --ignore=E501 .
   - pytest
