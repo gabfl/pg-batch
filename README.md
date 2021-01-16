@@ -1,9 +1,9 @@
 # pg-batch
 
 [![Pypi](https://img.shields.io/pypi/v/pg-batch.svg)](https://pypi.org/project/pg-batch)
-[![Build Status](https://travis-ci.org/gabfl/pg-batch.svg?branch=master)](https://travis-ci.org/gabfl/pg-batch)
-[![codecov](https://codecov.io/gh/gabfl/pg-batch/branch/master/graph/badge.svg)](https://codecov.io/gh/gabfl/pg-batch)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/gabfl/pg-batch/master/LICENSE)
+[![Build Status](https://travis-ci.org/gabfl/pg-batch.svg?branch=main)](https://travis-ci.org/gabfl/pg-batch)
+[![codecov](https://codecov.io/gh/gabfl/pg-batch/branch/main/graph/badge.svg)](https://codecov.io/gh/gabfl/pg-batch)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/gabfl/pg-batch/main/LICENSE)
 
 PostgreSQL equivalent of https://github.com/gabfl/mysql-batch.
 
