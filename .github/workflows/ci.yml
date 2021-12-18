@@ -27,7 +27,7 @@ jobs:
           sudo -u postgres psql --command="CREATE USER db_user PASSWORD 'db_password'" --command="\du"
       - name: Create PostgreSQL database
         run: |
-          sudo -u postgres createdb --owner=my_db timetable
+          sudo -u postgres createdb --owner=db_user my_db
       - name: Install dependencies
         run: |
           pip install -U pip
