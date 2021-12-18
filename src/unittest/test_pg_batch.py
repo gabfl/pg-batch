@@ -9,9 +9,9 @@ from src import pg_batch
 class Test(unittest.TestCase):
 
     host = 'localhost'
-    user = 'postgres'
+    user = 'db_user'
     database = 'my_db'
-    password = ''
+    password = 'db_password'
     port = 5432
 
     # Sample schema
