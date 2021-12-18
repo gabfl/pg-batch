@@ -1,7 +1,7 @@
 # pg-batch
 
 [![Pypi](https://img.shields.io/pypi/v/pg-batch.svg)](https://pypi.org/project/pg-batch)
-[![Build Status](https://travis-ci.org/gabfl/pg-batch.svg?branch=main)](https://travis-ci.org/gabfl/pg-batch)
+[![Build Status](https://github.com/gabfl/pg-batch/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gabfl/pg-batch/actions)
 [![codecov](https://codecov.io/gh/gabfl/pg-batch/branch/main/graph/badge.svg)](https://codecov.io/gh/gabfl/pg-batch)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/gabfl/pg-batch/main/LICENSE)
 
