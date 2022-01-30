@@ -18,7 +18,7 @@ setup(
     packages=['pg_batch'],
     package_dir={'pg_batch': 'src'},
     install_requires=[  # external dependencies
-        'psycopg2-binary==3.0.*'
+        'psycopg2-binary==2.9.*'
     ],
     entry_points={
         'console_scripts': [
