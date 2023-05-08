@@ -33,6 +33,10 @@ jobs:
       - name: Create PostgreSQL database
         run: |
           sudo -u postgres createdb --owner=db_user my_db
+      - name: Install deb dependencies
+        run: |
+          sudo apt update
+          sudo apt install pandoc
       - name: Install dependencies
         run: |
           pip install -U pip
