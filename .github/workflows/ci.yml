@@ -33,10 +33,14 @@ jobs:
       - name: Create PostgreSQL database
         run: |
           sudo -u postgres createdb --owner=db_user my_db
+      - name: Install deb dependencies
+        run: |
+          sudo apt update
+          sudo apt install pandoc
       - name: Install dependencies
         run: |
           pip install -U pip
-          pip install pycodestyle codecov pytest
+          pip install pycodestyle coverage pytest pypandoc
           python setup.py install
       - name: Run pycodestyle
         run: |
@@ -47,6 +51,8 @@ jobs:
       - name: Generate coverage report
         run: |
           coverage report -m
-      - name: Report to codecov
+      - name: Upload coverage reports to Codecov
         run: |
-          codecov
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
