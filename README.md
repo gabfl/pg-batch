@@ -111,7 +111,7 @@ usage: pg_batch [-h] [-H HOST] [-P PORT] -U USER [-p PASSWORD] -d DATABASE -t
                 [-rbz READ_BATCH_SIZE] [-wbz WRITE_BATCH_SIZE] [-S SLEEP]
                 [-a {update,delete}] [-n]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -H HOST, --host HOST  PostgreSQL server host
   -P PORT, --port PORT  PostgreSQL server port

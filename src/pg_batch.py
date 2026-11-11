@@ -2,7 +2,6 @@
 
 # Author: Gabriel Bordeaux (gabfl)
 # Github: https://github.com/gabfl/pg-batch
-# Compatible with python 2.7 & 3
 
 import sys
 import time
@@ -93,19 +92,11 @@ def get_input():
         Get user input
     """
 
-    # Get user choice with python 2.7 retro-compatibility
-    if sys.version_info >= (3, 0):
-        # Python 3
-        # print ("python >= 3");
-        return input().lower()
-    else:
-        # Python 2.7 retro-compatibility
-        # print ("python 2.7");
-        return raw_input().lower()
+    return input().lower()
 
 
 def query_yes_no(question, default="yes"):
-    """Ask a yes/no question via raw_input() and return their answer.
+    """Ask a yes/no question via input() and return their answer.
 
     "question" is a string that is presented to the user.
     "default" is the presumed answer if the user just hits <Enter>.
@@ -221,7 +212,7 @@ def execute(host, user, port, password, database, action, table, where, set_=Non
                         ids = []
 
                 # Process final batch
-                if ids and len(ids) >= 0:
+                if ids:
                     if action == 'delete':
                         # Process delete
                         delete_batch(ids, table, sleep, primary_key)

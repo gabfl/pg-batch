@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pg_batch"
+version = "1.2.0"
+description = "Run large PostgreSQL UPDATE and DELETE queries with small batches to prevent locks"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Gabriel Bordeaux", email = "pypi@gab.lc" }]
+requires-python = ">=3.10"
+dependencies = ["psycopg2-binary>=2.9,<3"]
+classifiers = [
+    "Topic :: Software Development",
+    "Topic :: Database",
+    "Topic :: Database :: Database Engines/Servers",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Development Status :: 5 - Production/Stable",
+]
+
+[project.urls]
+Homepage = "https://github.com/gabfl/pg-batch"
+Issues = "https://github.com/gabfl/pg-batch/issues"
+
+[project.scripts]
+pg_batch = "pg_batch.pg_batch:main"
+
+[tool.setuptools]
+packages = ["pg_batch"]
+package-dir = { pg_batch = "src" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

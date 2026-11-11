@@ -1,12 +1,9 @@
 [run]
-source=pg-batch
+source = pg_batch
 
 [report]
 omit =
-  setup.py
-  src/__main__.py
-  src/unittest/*
-  venv/*
+  */__main__.py
 exclude_lines =
-  if __name__ == "__main__":
-  main()
+  pragma: no cover
+  if __name__ == .__main__.:
